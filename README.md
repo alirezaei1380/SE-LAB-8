@@ -35,3 +35,81 @@ for (int i = 0; i < 10000; i++)
 <img width="1728" alt="se-lab8-7" src="https://github.com/alirezaei1380/SE-LAB-8/assets/59190480/13bfb691-0e9a-4b72-93cc-503738e5bba0">
 
 As you can see in the pictures, cpu time has improved significantly.
+
+
+## Part 2
+
+For this part we are using a code which calculates prime numbers in 1 to 10000 range. Here is the initial code we implemented:
+
+```java
+public class PrimeCalculator {
+    public static void main(String[] args) {
+        int limit = 10000;
+        System.out.println("First prime numbers up to " + limit + ":");
+        for (int i = 2; i <= limit; i++) {
+            if (isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+
+        // Check from 2 to number-1 (inefficient on purpose)
+        for (int i = 2; i < number; i++) {
+            // Inner loop to add unnecessary complexity
+            for (int j = 1; j <= i; j++) {
+                if (i * j == number) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+
+So, after running this code using our profiler app, we have this result:
+
+Now, we try to optimize it by adding a list of booleans which handles a mapping of <number as index, if it is prime>. This means we set the prime boolean false or all multiplication of values we iterate, By doing this we won't check the values again.
+Here is the updated code:
+
+```java
+import java.util.Arrays;
+
+public class PrimeCalculator {
+    public static void main(String[] args) {
+        int limit = 10000;
+        boolean[] isPrime = sieveOfEratosthenes(limit);
+
+        System.out.println("Prime numbers up to " + limit + ":");
+        for (int i = 2; i <= limit; i++) {
+            if (isPrime[i]) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static boolean[] sieveOfEratosthenes(int n) {
+        boolean[] isPrime = new boolean[n + 1];
+        Arrays.fill(isPrime, true);
+        isPrime[0] = false;
+        isPrime[1] = false;
+
+        for (int i = 2; i * i <= n; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        return isPrime;
+    }
+}
+```
+And now, here is the result by using profiler app. We have a significant reduction in CPU usage:
+
