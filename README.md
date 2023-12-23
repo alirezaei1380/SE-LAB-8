@@ -39,7 +39,7 @@ As you can see in the pictures, cpu time has improved significantly.
 
 ## Part 2
 
-For this part we are using a code which calculates prime numbers in 1 to 10000 range. Here is the initial code we implemented:
+For this part, we are using a code that calculates prime numbers in the 1 to 10000 range. Here is the initial code we implemented:
 
 ```java
 public class PrimeCalculator {
@@ -73,8 +73,12 @@ public class PrimeCalculator {
 ```
 
 So, after running this code using our profiler app, we have this result:
+<img width="1398" alt="Screen Shot 1402-10-02 at 21 41 35" src="https://github.com/alirezaei1380/SE-LAB-8/assets/60629485/26faa183-9dec-4ff1-afa5-a62ccac26320">
+And here is CPU usage:
+<img width="1398" alt="Screen Shot 1402-10-02 at 21 41 22" src="https://github.com/alirezaei1380/SE-LAB-8/assets/60629485/4b34134f-4033-42a2-ab3a-5717e2907198">
 
-Now, we try to optimize it by adding a list of booleans which handles a mapping of <number as index, if it is prime>. This means we set the prime boolean false or all multiplication of values we iterate, By doing this we won't check the values again.
+
+Now, we try to optimize it by adding a list of booleans that handles a mapping of <number as an index, if it is prime>. This means we set the prime boolean false or all multiplication of values we iterate, By doing this we won't recheck the values.
 Here is the updated code:
 
 ```java
@@ -111,5 +115,9 @@ public class PrimeCalculator {
     }
 }
 ```
-And now, here is the result by using profiler app. We have a significant reduction in CPU usage:
+And now, here is the result by using the profiler app. We have a significant reduction in CPU usage:
+
+<img width="1398" alt="Screen Shot 1402-10-02 at 21 43 34" src="https://github.com/alirezaei1380/SE-LAB-8/assets/60629485/32216296-009a-4a62-a817-0a76e8fa5fa2">
+
+<img width="1398" alt="Screen Shot 1402-10-02 at 21 43 27" src="https://github.com/alirezaei1380/SE-LAB-8/assets/60629485/f57ba1d2-c6fb-48c8-b460-d457c864947c">
 
